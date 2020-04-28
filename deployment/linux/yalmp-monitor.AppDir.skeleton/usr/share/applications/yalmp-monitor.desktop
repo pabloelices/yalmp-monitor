@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=YALMP Monitor
+Exec=yalmp-monitor
+Icon=yalmp-monitor
+Comment=YALMP real-time viewer.
+Terminal=false
+Categories=Utility;
