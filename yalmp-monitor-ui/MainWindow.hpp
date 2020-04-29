@@ -53,10 +53,15 @@ public:
   ~MainWindow();
 private slots:
   void onExitTriggered();
+  void onSingleViewTriggered();
+  void onTwoColumnsViewTriggered();
+  void onGridViewTriggered();
   void onAboutTriggered();
   void onUpdateClicked();
   void onConnectClicked();
   void onDisconnectClicked();
+  void onTopSplitterMoved();
+  void onBottomSplitterMoved();
   void onMessagingServiceStarted();
   void onMessagingServiceErrored(const QString& errorMessage);
   void onMessagingServiceStopped();
@@ -67,6 +72,10 @@ private slots:
 private:
   void setControlsToIdlePosition();
   void setControlsToBusyPosition();
+
+  void setSingleView();
+  void setTwoColumnsView();
+  void setGridView();
 
   Ui::MainWindow*             mUi;
   QIcon                       mWindowIcon;

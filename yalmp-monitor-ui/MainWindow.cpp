@@ -55,14 +55,33 @@ MainWindow::MainWindow(QWidget* parent)
   mUi->comboBoxBaudRate->setModel(mBaudRateListModel);
 
   mTextAlignmentProxyModel->setSourceModel(mYalmpMessageTableModel);
-  mUi->tableViewMessages->setModel(mTextAlignmentProxyModel);
 
-  // Messages table view.
+  mUi->tableViewMessagesTopRight->setModel(mTextAlignmentProxyModel);
+  mUi->tableViewMessagesBottomRight->setModel(mTextAlignmentProxyModel);
+  mUi->tableViewMessagesBottomLeft->setModel(mTextAlignmentProxyModel);
+  mUi->tableViewMessagesTopLeft->setModel(mTextAlignmentProxyModel);
 
-  mUi->tableViewMessages->horizontalHeader()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
-  mUi->tableViewMessages->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
-  mUi->tableViewMessages->verticalHeader()->hide();
-  mUi->tableViewMessages->setSelectionBehavior(QAbstractItemView::SelectRows);
+  // Table views.
+
+  mUi->tableViewMessagesTopRight->horizontalHeader()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
+  mUi->tableViewMessagesTopRight->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
+  mUi->tableViewMessagesTopRight->verticalHeader()->hide();
+  mUi->tableViewMessagesTopRight->setSelectionBehavior(QAbstractItemView::SelectRows);
+
+  mUi->tableViewMessagesBottomRight->horizontalHeader()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
+  mUi->tableViewMessagesBottomRight->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
+  mUi->tableViewMessagesBottomRight->verticalHeader()->hide();
+  mUi->tableViewMessagesBottomRight->setSelectionBehavior(QAbstractItemView::SelectRows);
+
+  mUi->tableViewMessagesBottomLeft->horizontalHeader()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
+  mUi->tableViewMessagesBottomLeft->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
+  mUi->tableViewMessagesBottomLeft->verticalHeader()->hide();
+  mUi->tableViewMessagesBottomLeft->setSelectionBehavior(QAbstractItemView::SelectRows);
+
+  mUi->tableViewMessagesTopLeft->horizontalHeader()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
+  mUi->tableViewMessagesTopLeft->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
+  mUi->tableViewMessagesTopLeft->verticalHeader()->hide();
+  mUi->tableViewMessagesTopLeft->setSelectionBehavior(QAbstractItemView::SelectRows);
 
   // Buttons.
 
@@ -73,7 +92,15 @@ MainWindow::MainWindow(QWidget* parent)
   // Menus.
 
   connect(mUi->actionExit, &QAction::triggered, this, &MainWindow::onExitTriggered);
+  connect(mUi->actionSingleView, &QAction::triggered, this, &MainWindow::onSingleViewTriggered);
+  connect(mUi->actionTwoColumnsView, &QAction::triggered, this, &MainWindow::onTwoColumnsViewTriggered);
+  connect(mUi->actionGridView, &QAction::triggered, this, &MainWindow::onGridViewTriggered);
   connect(mUi->actionAbout, &QAction::triggered, this, &MainWindow::onAboutTriggered);
+
+  // Splitters.
+
+  connect(mUi->splitterTop, &QSplitter::splitterMoved, this, &MainWindow::onTopSplitterMoved);
+  connect(mUi->splitterBottom, &QSplitter::splitterMoved, this, &MainWindow::onBottomSplitterMoved);
 
   // MessagingService -> MainWindow.
 
@@ -95,6 +122,10 @@ MainWindow::MainWindow(QWidget* parent)
   // Prepare controls.
 
   setControlsToIdlePosition();
+
+  // Set grid view as default.
+
+  setGridView();
 };
 
 MainWindow::~MainWindow()
@@ -105,6 +136,35 @@ MainWindow::~MainWindow()
 void MainWindow::onExitTriggered()
 {
   close();
+}
+
+void MainWindow::onSingleViewTriggered()
+{
+  setSingleView();
+}
+
+void MainWindow::onTwoColumnsViewTriggered()
+{
+  setTwoColumnsView();
+}
+
+void MainWindow::onGridViewTriggered()
+{
+  setGridView();
+}
+
+void MainWindow::onTopSplitterMoved()
+{
+  // The following line does not trigger splitterBottom::splitterMoved so there is no circular signalling.
+
+  mUi->splitterBottom->setSizes(mUi->splitterTop->sizes());
+}
+
+void MainWindow::onBottomSplitterMoved()
+{
+  // The following line does not trigger splitterTop::splitterMoved so there is no circular signalling.
+
+  mUi->splitterTop->setSizes(mUi->splitterBottom->sizes());
 }
 
 void MainWindow::onAboutTriggered()
@@ -204,4 +264,33 @@ void MainWindow::setControlsToBusyPosition()
 
   mUi->pushButtonDisconnect->setEnabled(true);
   mUi->pushButtonDisconnect->show();
+}
+
+void MainWindow::setSingleView()
+{
+  mUi->splitterTop->show();
+
+  mUi->tableViewMessagesTopRight->hide();
+  mUi->splitterBottom->hide();
+}
+
+void MainWindow::setTwoColumnsView()
+{
+  mUi->splitterTop->show();
+  mUi->tableViewMessagesTopRight->show();
+
+  mUi->splitterBottom->hide();
+
+  mUi->splitterTop->setSizes(QList<int> {1000, 1000});
+}
+
+void MainWindow::setGridView()
+{
+  mUi->splitterTop->show();
+  mUi->tableViewMessagesTopRight->show();
+  mUi->splitterBottom->show();
+
+  mUi->splitterMiddle->setSizes(QList<int> {1000, 1000});
+  mUi->splitterTop->setSizes(QList<int> {1000, 1000});
+  mUi->splitterBottom->setSizes(QList<int> {1000, 1000});
 }
