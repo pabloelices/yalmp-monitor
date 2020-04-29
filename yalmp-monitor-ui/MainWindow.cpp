@@ -62,24 +62,9 @@ MainWindow::MainWindow(QWidget* parent)
 
   // Table views.
 
-  mUi->tableViewMessagesTopRight->horizontalHeader()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
-  mUi->tableViewMessagesTopRight->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
-  mUi->tableViewMessagesTopRight->verticalHeader()->hide();
   mUi->tableViewMessagesTopRight->setSelectionBehavior(QAbstractItemView::SelectRows);
-
-  mUi->tableViewMessagesBottomRight->horizontalHeader()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
-  mUi->tableViewMessagesBottomRight->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
-  mUi->tableViewMessagesBottomRight->verticalHeader()->hide();
   mUi->tableViewMessagesBottomRight->setSelectionBehavior(QAbstractItemView::SelectRows);
-
-  mUi->tableViewMessagesBottomLeft->horizontalHeader()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
-  mUi->tableViewMessagesBottomLeft->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
-  mUi->tableViewMessagesBottomLeft->verticalHeader()->hide();
   mUi->tableViewMessagesBottomLeft->setSelectionBehavior(QAbstractItemView::SelectRows);
-
-  mUi->tableViewMessagesTopLeft->horizontalHeader()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
-  mUi->tableViewMessagesTopLeft->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
-  mUi->tableViewMessagesTopLeft->verticalHeader()->hide();
   mUi->tableViewMessagesTopLeft->setSelectionBehavior(QAbstractItemView::SelectRows);
 
   // Buttons.

@@ -84,8 +84,20 @@
         <number>6</number>
        </property>
        <widget class="QTableView" name="tableViewMessagesTopLeft">
+        <attribute name="horizontalHeaderStretchLastSection">
+         <bool>true</bool>
+        </attribute>
+        <attribute name="verticalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
        </widget>
        <widget class="QTableView" name="tableViewMessagesTopRight">
+        <attribute name="horizontalHeaderStretchLastSection">
+         <bool>true</bool>
+        </attribute>
+        <attribute name="verticalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
        </widget>
       </widget>
       <widget class="QSplitter" name="splitterBottom">
@@ -96,8 +108,20 @@
         <number>6</number>
        </property>
        <widget class="QTableView" name="tableViewMessagesBottomLeft">
+        <attribute name="horizontalHeaderStretchLastSection">
+         <bool>true</bool>
+        </attribute>
+        <attribute name="verticalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
        </widget>
        <widget class="QTableView" name="tableViewMessagesBottomRight">
+        <attribute name="horizontalHeaderStretchLastSection">
+         <bool>true</bool>
+        </attribute>
+        <attribute name="verticalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
        </widget>
       </widget>
      </widget>
