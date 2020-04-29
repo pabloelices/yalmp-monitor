@@ -21,7 +21,6 @@
 
 #include "TextAlignmentProxyModel.hpp"
 
-#include <QDate>
 #include <QMessageBox>
 
 MainWindow::MainWindow(QWidget* parent)
