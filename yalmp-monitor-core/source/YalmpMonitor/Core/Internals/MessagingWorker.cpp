@@ -92,15 +92,16 @@ namespace YalmpMonitor::Core::Internals
         case QSerialPort::SerialPortError::PermissionError:
         case QSerialPort::SerialPortError::OpenError:
 
-          emit errored(QStringLiteral("The device is already opened or the user does not have the right permissions to "
-                                      "open it."));
+          emit errored(QStringLiteral("The device %1 is already opened or the user does not have the right permissions "
+                                      "to open it.")
+                         .arg(mSerialPort->portName()));
 
           break;
 
         case QSerialPort::SerialPortError::ReadError:
         case QSerialPort::SerialPortError::ResourceError:
 
-          emit errored(QStringLiteral("Device unavailable."));
+          emit errored(QStringLiteral("Device %1 unavailable.").arg(mSerialPort->portName()));
 
           break;
 
