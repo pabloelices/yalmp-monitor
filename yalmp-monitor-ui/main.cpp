@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
 {
   QCoreApplication::setOrganizationName("Pablo Daniel Gómez Elices");
   QCoreApplication::setApplicationName("YALMP Monitor");
-  QCoreApplication::setApplicationVersion("2020.04.1-alpha");
+  QCoreApplication::setApplicationVersion("2020.05-alpha");
 
   qRegisterMetaType<YalmpPacket>("YalmpPacket");
 
