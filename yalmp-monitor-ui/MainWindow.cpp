@@ -256,6 +256,8 @@ void MainWindow::setSingleView()
 
   mUi->tableViewMessagesTopRight->hide();
   mUi->splitterBottom->hide();
+
+  mUi->tableViewMessagesTopLeft->scrollToTop();
 }
 
 void MainWindow::setTwoColumnsView()
@@ -266,6 +268,9 @@ void MainWindow::setTwoColumnsView()
   mUi->splitterBottom->hide();
 
   mUi->splitterTop->setSizes(QList<int> {1000, 1000});
+
+  mUi->tableViewMessagesTopRight->scrollToTop();
+  mUi->tableViewMessagesTopLeft->scrollToTop();
 }
 
 void MainWindow::setGridView()
@@ -277,4 +282,9 @@ void MainWindow::setGridView()
   mUi->splitterMiddle->setSizes(QList<int> {1000, 1000});
   mUi->splitterTop->setSizes(QList<int> {1000, 1000});
   mUi->splitterBottom->setSizes(QList<int> {1000, 1000});
+
+  mUi->tableViewMessagesTopRight->scrollToTop();
+  mUi->tableViewMessagesBottomRight->scrollToTop();
+  mUi->tableViewMessagesBottomLeft->scrollToTop();
+  mUi->tableViewMessagesTopLeft->scrollToTop();
 }
