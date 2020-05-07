@@ -43,6 +43,8 @@ private slots:
   void TestPacket1();
   void TestPacket2();
   void TestPacket3();
+  void TestPacket4();
+  void TestPacket5();
   void cleanupTestCase();
 };
 
@@ -167,6 +169,92 @@ void TestYalmpPacketParser::TestPacket3()
     QCOMPARE(packet.payloadLength(), 0x05);
     QCOMPARE(packet.payload(), QByteArray {"0.1.0"});
     QCOMPARE(packet.checksum(), 0x0E);
+  }
+}
+
+void TestYalmpPacketParser::TestPacket4()
+{
+  // 4E | FF | 05 | 30 2E 31 2E 30 | 0E
+  // SF | ID | PL |        P       | CS
+  //    |    |    |  0  .  1  .  0 |
+
+  QByteArray bytes;
+
+  bytes.resize(9);
+
+  bytes[0] = 0x4E;
+  bytes[1] = 0xFF;
+  bytes[2] = 0x05;
+  bytes[3] = 0x30;
+  bytes[4] = 0x2E;
+  bytes[5] = 0x31;
+  bytes[6] = 0x2E;
+  bytes[7] = 0x30;
+  bytes[8] = 0x0E + 0x01; // Altered.
+
+  QSignalSpy spy {mYalmpPacketParser.get(), &YalmpPacketParser::packetRejected};
+
+  QBENCHMARK
+  {
+    mYalmpPacketParser->parse(bytes);
+
+    QCOMPARE(spy.count(), 1);
+
+    QList<QVariant> arguments = spy.takeFirst();
+
+    YalmpPacket parsedPacket {arguments.at(0).value<YalmpPacket>()};
+    quint8      computedChecksum {arguments.at(1).value<quint8>()};
+
+    QCOMPARE(parsedPacket.startFlag(), 0x4E);
+    QCOMPARE(parsedPacket.messageId(), 0xFF);
+    QCOMPARE(parsedPacket.payloadLength(), 0x05);
+    QCOMPARE(parsedPacket.payload(), QByteArray {"0.1.0"});
+    QCOMPARE(parsedPacket.checksum(), 0x0E + 0x01);
+
+    QCOMPARE(computedChecksum, 0x0E);
+  }
+}
+
+void TestYalmpPacketParser::TestPacket5()
+{
+  // 4E | FF | 05 | 30 2E 31 2E 30 | 0E
+  // SF | ID | PL |        P       | CS
+  //    |    |    |  0  .  1  .  0 |
+
+  QByteArray bytes;
+
+  bytes.resize(9);
+
+  bytes[0] = 0x4E;
+  bytes[1] = 0xFF;
+  bytes[2] = 0x05;
+  bytes[3] = 0x30;
+  bytes[4] = 0x2E;
+  bytes[5] = 0x31;
+  bytes[6] = 0x2E;
+  bytes[7] = 0x30 + 0x01; // Altered.
+  bytes[8] = 0x0E;
+
+  QSignalSpy spy {mYalmpPacketParser.get(), &YalmpPacketParser::packetRejected};
+
+  QBENCHMARK
+  {
+    mYalmpPacketParser->parse(bytes);
+
+    QCOMPARE(spy.count(), 1);
+
+    QList<QVariant> arguments = spy.takeFirst();
+
+    YalmpPacket parsedPacket {arguments.at(0).value<YalmpPacket>()};
+    quint8      computedChecksum {arguments.at(1).value<quint8>()};
+
+    QCOMPARE(parsedPacket.startFlag(), 0x4E);
+    QCOMPARE(parsedPacket.messageId(), 0xFF);
+    QCOMPARE(parsedPacket.payloadLength(), 0x05);
+    QCOMPARE(parsedPacket.payload(), QByteArray {"0.1.1"});
+    QCOMPARE(parsedPacket.checksum(), 0x0E);
+
+    QCOMPARE(computedChecksum, 0x0D);
   }
 }
 
