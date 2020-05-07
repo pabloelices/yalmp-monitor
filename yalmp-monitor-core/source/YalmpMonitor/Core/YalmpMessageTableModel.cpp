@@ -64,6 +64,11 @@ namespace YalmpMonitor::Core
       return QVariant {};
     }
 
+    if (role == Qt::TextAlignmentRole)
+    {
+      return Qt::AlignCenter;
+    }
+
     if (role == Qt::DisplayRole)
     {
       if (index.column() == 0)

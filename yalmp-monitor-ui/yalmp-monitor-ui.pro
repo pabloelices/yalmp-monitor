@@ -25,13 +25,11 @@ CONFIG += c++17
 DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
-    TextAlignmentProxyModel.cpp \
     main.cpp \
     MainWindow.cpp
 
 HEADERS += \
-    MainWindow.hpp \
-    TextAlignmentProxyModel.hpp
+    MainWindow.hpp
 
 FORMS += \
     MainWindow.ui

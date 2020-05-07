@@ -19,8 +19,6 @@
 #include "MainWindow.hpp"
 #include "ui_MainWindow.h"
 
-#include "TextAlignmentProxyModel.hpp"
-
 #include <QMessageBox>
 
 MainWindow::MainWindow(QWidget* parent)
@@ -31,7 +29,6 @@ MainWindow::MainWindow(QWidget* parent)
   , mMessagingService {new MessagingService {this}}
   , mYalmpMessageTableModel {new YalmpMessageTableModel {*mMessagingService, this}}
   , mMessagingStatisticsService {new MessagingStatisticsService {*mMessagingService, this}}
-  , mTextAlignmentProxyModel {new TextAlignmentProxyModel {this}}
 {
   mUi->setupUi(this);
 
@@ -53,12 +50,10 @@ MainWindow::MainWindow(QWidget* parent)
   mUi->comboBoxPortName->setModel(mPortNameListModel);
   mUi->comboBoxBaudRate->setModel(mBaudRateListModel);
 
-  mTextAlignmentProxyModel->setSourceModel(mYalmpMessageTableModel);
-
-  mUi->tableViewMessagesTopRight->setModel(mTextAlignmentProxyModel);
-  mUi->tableViewMessagesBottomRight->setModel(mTextAlignmentProxyModel);
-  mUi->tableViewMessagesBottomLeft->setModel(mTextAlignmentProxyModel);
-  mUi->tableViewMessagesTopLeft->setModel(mTextAlignmentProxyModel);
+  mUi->tableViewMessagesTopRight->setModel(mYalmpMessageTableModel);
+  mUi->tableViewMessagesBottomRight->setModel(mYalmpMessageTableModel);
+  mUi->tableViewMessagesBottomLeft->setModel(mYalmpMessageTableModel);
+  mUi->tableViewMessagesTopLeft->setModel(mYalmpMessageTableModel);
 
   // Table views.
 

@@ -42,8 +42,6 @@ using YalmpMonitor::Core::MessagingStatisticsService;
 using YalmpMonitor::Core::PortNameListModel;
 using YalmpMonitor::Core::YalmpMessageTableModel;
 
-class TextAlignmentProxyModel;
-
 class MainWindow final : public QMainWindow
 {
   Q_OBJECT
@@ -84,7 +82,6 @@ private:
   MessagingService*           mMessagingService;
   YalmpMessageTableModel*     mYalmpMessageTableModel;
   MessagingStatisticsService* mMessagingStatisticsService;
-  TextAlignmentProxyModel*    mTextAlignmentProxyModel;
 };
 
 #endif // YALMP_MONITOR_UI_MAIN_WINDOW_HPP
