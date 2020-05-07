@@ -39,7 +39,6 @@ SOURCES += \
     source/YalmpMonitor/Core/MessagingService.cpp \
     source/YalmpMonitor/Core/MessagingStatisticsService.cpp \
     source/YalmpMonitor/Core/PortNameListModel.cpp \
-    source/YalmpMonitor/Core/Version.cpp \
     source/YalmpMonitor/Core/YalmpMessageTableModel.cpp \
     source/YalmpMonitor/Core/YalmpPacket.cpp
 
@@ -53,6 +52,5 @@ HEADERS += \
     include/YalmpMonitor/Core/MessagingService.hpp \
     include/YalmpMonitor/Core/MessagingStatisticsService.hpp \
     include/YalmpMonitor/Core/PortNameListModel.hpp \
-    include/YalmpMonitor/Core/Version.hpp \
     include/YalmpMonitor/Core/YalmpMessageTableModel.hpp \
     include/YalmpMonitor/Core/YalmpPacket.hpp
