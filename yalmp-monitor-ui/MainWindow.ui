@@ -84,6 +84,9 @@
         <number>6</number>
        </property>
        <widget class="QTableView" name="tableViewMessagesTopLeft">
+        <property name="focusPolicy">
+         <enum>Qt::ClickFocus</enum>
+        </property>
         <attribute name="horizontalHeaderHighlightSections">
          <bool>false</bool>
         </attribute>
@@ -95,6 +98,9 @@
         </attribute>
        </widget>
        <widget class="QTableView" name="tableViewMessagesTopRight">
+        <property name="focusPolicy">
+         <enum>Qt::ClickFocus</enum>
+        </property>
         <attribute name="horizontalHeaderHighlightSections">
          <bool>false</bool>
         </attribute>
@@ -114,6 +120,9 @@
         <number>6</number>
        </property>
        <widget class="QTableView" name="tableViewMessagesBottomLeft">
+        <property name="focusPolicy">
+         <enum>Qt::ClickFocus</enum>
+        </property>
         <attribute name="horizontalHeaderHighlightSections">
          <bool>false</bool>
         </attribute>
@@ -125,6 +134,9 @@
         </attribute>
        </widget>
        <widget class="QTableView" name="tableViewMessagesBottomRight">
+        <property name="focusPolicy">
+         <enum>Qt::ClickFocus</enum>
+        </property>
         <attribute name="horizontalHeaderHighlightSections">
          <bool>false</bool>
         </attribute>
