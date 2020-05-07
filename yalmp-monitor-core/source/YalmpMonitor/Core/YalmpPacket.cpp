@@ -31,18 +31,15 @@ namespace YalmpMonitor::Core
     , mPayload {payload}
     , mChecksum {checksum}
   {
+    Q_ASSERT(payload.count() < 256);
   }
 
   YalmpPacket::YalmpPacket(quint8 startFlag, quint8 messageId, const QByteArray& payload)
-    : mStartFlag {startFlag}
-    , mMessageId {messageId}
-    , mPayloadLength {static_cast<quint8>(payload.count())}
-    , mPayload {payload}
-    , mChecksum {YalmpChecksum::computeChecksum(mMessageId, mPayload)}
+    : YalmpPacket(startFlag, messageId, payload, YalmpChecksum::computeChecksum(messageId, payload))
   {
   }
 
-  YalmpPacket::YalmpPacket() : YalmpPacket(0x4E, 0x00, QByteArray {}, 0xFF)
+  YalmpPacket::YalmpPacket() : YalmpPacket(0x4E, 0x00, QByteArray {})
   {
   }
 
