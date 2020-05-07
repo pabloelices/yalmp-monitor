@@ -258,6 +258,8 @@ void MainWindow::setSingleView()
   mUi->splitterBottom->hide();
 
   mUi->tableViewMessagesTopLeft->scrollToTop();
+
+  mUi->tableViewMessagesTopLeft->selectionModel()->clear();
 }
 
 void MainWindow::setTwoColumnsView()
@@ -271,6 +273,9 @@ void MainWindow::setTwoColumnsView()
 
   mUi->tableViewMessagesTopRight->scrollToTop();
   mUi->tableViewMessagesTopLeft->scrollToTop();
+
+  mUi->tableViewMessagesTopRight->selectionModel()->clear();
+  mUi->tableViewMessagesTopLeft->selectionModel()->clear();
 }
 
 void MainWindow::setGridView()
@@ -287,4 +292,9 @@ void MainWindow::setGridView()
   mUi->tableViewMessagesBottomRight->scrollToTop();
   mUi->tableViewMessagesBottomLeft->scrollToTop();
   mUi->tableViewMessagesTopLeft->scrollToTop();
+
+  mUi->tableViewMessagesTopRight->selectionModel()->clear();
+  mUi->tableViewMessagesBottomRight->selectionModel()->clear();
+  mUi->tableViewMessagesBottomLeft->selectionModel()->clear();
+  mUi->tableViewMessagesTopLeft->selectionModel()->clear();
 }
